@@ -1,6 +1,7 @@
 /* ============ Tokens ============ */
 :root {
   --bone: #eae8df;
+  --paper: #ffffff;
   --sage: #b7c3bd;
   --ink: #1c1b18;
   --black: #111110;
@@ -292,13 +293,20 @@ svg[data-scribble] .ink {
 }
 
 /* ============ Split sections ============ */
+/* The two bone surfaces are the hero and the sage bands' surroundings;
+   the editorial body sections sit on white paper. */
+section.split,
+.manifesto,
+.impact {
+  background: var(--paper);
+}
+
 .split {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
-  max-width: 72rem;
-  margin: 0 auto;
-  padding: 7rem 2.5rem;
+  /* Full-bleed background; content centered to a 67rem measure via padding */
+  padding: 7rem max(2.5rem, calc((100% - 67rem) / 2));
 }
 
 .split__body {
