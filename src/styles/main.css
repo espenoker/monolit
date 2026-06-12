@@ -1,0 +1,569 @@
+/* ============ Tokens ============ */
+:root {
+  --bone: #eae8df;
+  --sage: #b7c3bd;
+  --ink: #1c1b18;
+  --black: #111110;
+  --stroke-w: 1.75px;
+  --font: "Newsreader", "Times New Roman", serif;
+  --ease-hand: cubic-bezier(0.5, 0.05, 0.55, 0.95);
+}
+
+/* ============ Base ============ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: clip;
+  background: var(--bone);
+  color: var(--ink);
+  font-family: var(--font);
+  font-optical-sizing: auto;
+  font-weight: 400;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+em {
+  font-style: italic;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+}
+
+h1,
+h2 {
+  font-weight: 400;
+  line-height: 1.06;
+  letter-spacing: -0.01em;
+}
+
+.label {
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+}
+
+.mark {
+  display: block;
+  width: 2rem;
+  height: auto;
+  fill: currentColor;
+  color: var(--ink);
+}
+
+/* Hidden sprite holding shared brand geometry (logomark, ring scribble) */
+.sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* ============ Scribbles (shared) ============ */
+.annotate {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.annotate > svg,
+.arrow-sweep,
+.signature,
+.world-map {
+  overflow: visible;
+}
+
+.annotate > svg {
+  position: absolute;
+  pointer-events: none;
+}
+
+/* Brand scribbles are filled ink outlines revealed by a masked centerline
+   stroke; hand-drawn extras (underline, caret, lead arrow, signature) are
+   plain strokes. Both carry .draw-path so one engine animates them. */
+svg[data-scribble] {
+  color: var(--ink);
+  fill: currentColor;
+}
+
+svg[data-scribble] .draw-path {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  /* Gap slightly longer than the dash and offset pushed past the path start,
+     so no round-cap "dot" bleeds through at the dash boundary before drawing. */
+  stroke-dasharray: 1 1.05;
+  stroke-dashoffset: 1.03;
+}
+
+svg[data-scribble] .ink {
+  stroke: var(--ink);
+  stroke-width: 1.75;
+}
+
+/* Stroke widths are in user units; tune per context so the rendered
+   ink reads ~1.5–2px at every scale the scribble is drawn at. */
+.annotate--caret .ink {
+  stroke-width: 4.5;
+}
+
+.annotate--lead .ink {
+  stroke-width: 2.6;
+}
+
+.signature .ink {
+  stroke-width: 2.4;
+}
+
+.annotate--circle > svg {
+  left: -0.55em;
+  top: -0.42em;
+  width: calc(100% + 1.1em);
+  height: calc(100% + 0.78em);
+}
+
+.annotate--hero > svg {
+  left: -0.3em;
+  top: -0.12em;
+  width: calc(100% + 0.6em);
+  height: calc(100% + 0.28em);
+}
+
+.annotate--underline > svg {
+  /* Top of the box anchors to the word's bottom edge; the box itself is
+     font-relative so the line hugs the descenders at any size. The vertical
+     squash this causes at body sizes is compensated by stroke-width below. */
+  left: -0.08em;
+  top: calc(100% - 0.12em);
+  width: calc(100% + 0.16em);
+  height: 0.3em;
+}
+
+.impact__body .annotate--underline .ink {
+  stroke-width: 6.5;
+}
+
+.annotate--brackets > svg {
+  /* Bracket ink occupies the outer ~12% of the asset on each side */
+  left: -0.25em;
+  top: -0.12em;
+  width: calc(100% + 0.5em);
+  height: calc(100% + 0.24em);
+}
+
+.annotate--lead > svg {
+  position: static;
+  display: inline-block;
+  width: 2.1em;
+  height: 0.85em;
+  vertical-align: -0.12em;
+}
+
+.annotate--caret {
+  width: 0.5em;
+}
+
+.annotate--caret > svg {
+  left: -0.18em;
+  top: -0.55em;
+  width: 0.85em;
+  height: 0.55em;
+}
+
+/* ============ Nav ============ */
+.nav {
+  display: flex;
+  justify-content: center;
+  padding: 2.2rem 1.5rem 0;
+}
+
+.nav__wordmark {
+  display: block;
+  color: var(--ink);
+}
+
+.nav__wordmark svg {
+  display: block;
+  height: 0.95rem;
+  width: auto;
+  fill: currentColor;
+}
+
+/* ============ Hero ============ */
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 82vh;
+  padding: 4rem 1.5rem 3rem;
+  text-align: center;
+}
+
+.hero__title {
+  font-size: clamp(3.2rem, 9.5vw, 7.5rem);
+  font-weight: 380;
+}
+
+.hero__mark {
+  margin-top: clamp(3rem, 9vh, 6rem);
+}
+
+.hero__mark .mark {
+  width: 2.2rem;
+}
+
+.hero.is-inkable {
+  cursor: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Cpath d='M3 25 L5.5 17.5 L21.5 1.5 Q23 0 24.5 1.5 L26.5 3.5 Q28 5 26.5 6.5 L10.5 22.5 Z' fill='%231C1B18' stroke='%23EAE8DF' stroke-width='1'/%3E%3C/svg%3E") 3 25, crosshair;
+  user-select: none;
+}
+
+.hero-ink {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.hero-ink path {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: var(--stroke-w);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.92;
+}
+
+.hero-hint,
+.hero-clear {
+  position: absolute;
+  bottom: 1.6rem;
+  opacity: 0;
+  transition: opacity 0.7s var(--ease-hand);
+  font-family: var(--font);
+  font-size: 0.85rem;
+  color: var(--ink);
+}
+
+.hero-hint {
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.hero-clear {
+  right: 2rem;
+  z-index: 4;
+  background: none;
+  border: none;
+  padding: 0.2rem 0.4rem;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  cursor: pointer;
+  pointer-events: none;
+}
+
+.hero-hint.is-visible {
+  opacity: 0.65;
+}
+
+.hero-clear.is-visible {
+  opacity: 0.65;
+  pointer-events: auto;
+}
+
+.hero-clear.is-visible:hover {
+  opacity: 1;
+}
+
+/* ============ Split sections ============ */
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 7rem 2.5rem;
+}
+
+.split__body {
+  max-width: 21rem;
+}
+
+.split__body p + p {
+  margin-top: 1.4em;
+}
+
+.split__body,
+.split .label {
+  font-size: 0.95rem;
+}
+
+/* How we work */
+.split--how {
+  position: relative;
+  padding-top: 4rem;
+  padding-bottom: 9rem;
+}
+
+.split__aside {
+  position: relative;
+}
+
+.annotate--label {
+  margin-left: 1.5rem;
+}
+
+.annotate--label > svg {
+  left: -1.5em;
+  top: -0.85em;
+  width: calc(100% + 3em);
+  height: calc(100% + 1.7em);
+}
+
+.arrow-sweep {
+  position: absolute;
+  left: -1rem;
+  top: 0.5rem;
+  width: min(30rem, 42vw);
+  height: auto;
+}
+
+/* ============ Manifesto ============ */
+.manifesto {
+  padding: 8rem 1.5rem 9rem;
+  text-align: center;
+}
+
+.manifesto__title {
+  font-size: clamp(2rem, 5.4vw, 4.2rem);
+  line-height: 1.18;
+}
+
+/* ============ Bands (sage) ============ */
+.band {
+  background: var(--sage);
+}
+
+.band--network {
+  padding: 1rem 0 6rem;
+}
+
+.split--band {
+  padding-top: 6rem;
+  padding-bottom: 3rem;
+}
+
+.world-map {
+  display: block;
+  width: min(64rem, 88vw);
+  height: auto;
+  margin: 0 auto;
+}
+
+.offices {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 60rem;
+  margin: 4rem auto 0;
+  padding: 0 2.5rem;
+  text-align: center;
+}
+
+.office__city {
+  font-size: 0.95rem;
+}
+
+.office__addr {
+  margin-top: 0.4rem;
+  font-size: 0.82rem;
+  opacity: 0.85;
+}
+
+.office__clock {
+  margin-top: 1.6rem;
+  font-size: clamp(1.6rem, 3vw, 2.3rem);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============ Build for impact ============ */
+.impact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 9rem 1.5rem 7rem;
+  text-align: center;
+}
+
+.impact__title {
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  line-height: 1.15;
+}
+
+.impact__mark {
+  margin: 4.5rem 0;
+}
+
+.impact__body {
+  max-width: 34rem;
+  font-size: 0.95rem;
+}
+
+.impact__body p + p {
+  margin-top: 1.5em;
+}
+
+.signature {
+  width: 9rem;
+  height: auto;
+  margin-top: 3.5rem;
+}
+
+/* ============ CTA ============ */
+.band--cta {
+  padding: 9rem 1.5rem;
+  text-align: center;
+}
+
+.cta__title {
+  max-width: 46rem;
+  margin: 0 auto;
+  font-size: clamp(2rem, 4.6vw, 3.4rem);
+  line-height: 1.22;
+}
+
+/* ============ Footer ============ */
+.checker {
+  display: grid;
+}
+
+.checker__row {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+}
+
+.checker__row i {
+  display: block;
+  aspect-ratio: 1;
+  background: var(--bone);
+}
+
+.checker__row i.b {
+  background: var(--black);
+}
+
+.checker__row--3 {
+  background: var(--black);
+}
+
+.footer__bar {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto 1fr 1fr;
+  align-items: center;
+  gap: 2rem;
+  background: var(--black);
+  color: var(--bone);
+  padding: 2.6rem 2.5rem 3rem;
+  font-size: 0.78rem;
+  line-height: 1.6;
+}
+
+.footer__bar .mark {
+  color: var(--bone);
+  width: 1.6rem;
+}
+
+.footer__col--right {
+  text-align: right;
+}
+
+/* ============ Responsive ============ */
+@media (max-width: 760px) {
+  .split {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding: 4.5rem 1.6rem;
+  }
+
+  .split__body {
+    max-width: 28rem;
+  }
+
+  .arrow-sweep {
+    position: static;
+    display: block;
+    width: 70vw;
+    margin: 1.5rem 0 0;
+  }
+
+  .split--how {
+    padding-bottom: 4.5rem;
+  }
+
+  .offices {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .footer__bar {
+    grid-template-columns: 1fr 1fr;
+    padding: 2rem 1.6rem 2.4rem;
+  }
+
+  .footer__col--mark {
+    display: none;
+  }
+
+  .footer__col--right {
+    text-align: left;
+  }
+
+  /* Let the manifesto wrap naturally instead of holding the desktop line breaks */
+  .manifesto__title br,
+  .cta__title br {
+    display: none;
+  }
+
+  .manifesto {
+    padding: 5rem 1.4rem 6rem;
+  }
+
+  .manifesto__title {
+    font-size: clamp(1.7rem, 7.5vw, 2.4rem);
+  }
+
+  .impact__title {
+    font-size: clamp(1.9rem, 8vw, 2.6rem);
+  }
+
+  .cta__title {
+    font-size: clamp(1.7rem, 7.5vw, 2.4rem);
+  }
+}
+
+/* ============ Reduced motion ============ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  svg[data-scribble] .draw-path {
+    stroke-dashoffset: 0;
+  }
+}
