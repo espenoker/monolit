@@ -445,6 +445,7 @@ section.split,
 
 /* ============ CTA ============ */
 .band--cta {
+  background: #e5e3d8;
   padding: 9rem 1.5rem;
   text-align: center;
 }
