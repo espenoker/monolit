@@ -1,12 +1,33 @@
+/* ============ Fonts ============ */
+@font-face {
+  font-family: "Ivar Text";
+  src: url("../assets/IvarTextTRIAL-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Ivar Text";
+  src: url("../assets/IvarTextTRIAL-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ============ Logomark animation ============ */
+[id^="Logo_animation_frame_"] path {
+  fill: currentColor;
+}
+
 /* ============ Tokens ============ */
 :root {
-  --bone: #eae8df;
+  --bone: #e5e3d8;
   --paper: #ffffff;
-  --sage: #b7c3bd;
-  --ink: #1c1b18;
+  --sage: #afc1c1;
+  --ink: #111110;
   --black: #111110;
   --stroke-w: 1.75px;
-  --font: "Newsreader", "Times New Roman", serif;
+  --font: "Ivar Text", "Times New Roman", serif;
   --ease-hand: cubic-bezier(0.5, 0.05, 0.55, 0.95);
 }
 
@@ -29,7 +50,7 @@ body {
   font-family: var(--font);
   font-optical-sizing: auto;
   font-weight: 400;
-  line-height: 1.55;
+  line-height: 1.3;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -47,13 +68,14 @@ a {
 h1,
 h2 {
   font-weight: 400;
-  line-height: 1.06;
-  letter-spacing: -0.01em;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
 }
 
 .label {
-  font-size: 0.85rem;
-  letter-spacing: 0.02em;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
 }
 
 .mark {
@@ -112,6 +134,7 @@ svg[data-scribble] .draw-path {
 svg[data-scribble] .ink {
   stroke: var(--ink);
   stroke-width: 1.75;
+  vector-effect: non-scaling-stroke;
 }
 
 /* Stroke widths are in user units; tune per context so the rendered
@@ -142,14 +165,22 @@ svg[data-scribble] .ink {
   height: calc(100% + 0.28em);
 }
 
+.annotate--hero .ink {
+  vector-effect: non-scaling-stroke;
+  stroke-width: var(--stroke-w);
+}
+
+
 .annotate--underline > svg {
-  /* Top of the box anchors to the word's bottom edge; the box itself is
-     font-relative so the line hugs the descenders at any size. The vertical
-     squash this causes at body sizes is compensated by stroke-width below. */
   left: -0.08em;
   top: calc(100% - 0.12em);
   width: calc(100% + 0.16em);
   height: 0.3em;
+}
+
+.manifesto .annotate--underline > svg {
+  height: 0.45em;
+  top: calc(100% - 0.08em);
 }
 
 .impact__body .annotate--underline .ink {
@@ -185,6 +216,11 @@ svg[data-scribble] .ink {
 
 /* ============ Nav ============ */
 .nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 5;
   display: flex;
   justify-content: center;
   padding: 2.2rem 1.5rem 0;
@@ -197,7 +233,7 @@ svg[data-scribble] .ink {
 
 .nav__wordmark svg {
   display: block;
-  height: 0.95rem;
+  height: 1.45rem;
   width: auto;
   fill: currentColor;
 }
@@ -209,26 +245,30 @@ svg[data-scribble] .ink {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 82vh;
+  min-height: 100svh;
   padding: 4rem 1.5rem 3rem;
   text-align: center;
 }
 
 .hero__title {
-  font-size: clamp(3.2rem, 9.5vw, 7.5rem);
-  font-weight: 380;
+  font-size: clamp(3rem, 6.8vw, 8rem);
+  line-height: 1.1;
+  padding-bottom: 3rem;
 }
 
 .hero__mark {
-  margin-top: clamp(3rem, 9vh, 6rem);
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .hero__mark .mark {
-  width: 2.2rem;
+  width: 6.7rem;
 }
 
 .hero.is-inkable {
-  cursor: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Cpath d='M3 25 L5.5 17.5 L21.5 1.5 Q23 0 24.5 1.5 L26.5 3.5 Q28 5 26.5 6.5 L10.5 22.5 Z' fill='%231C1B18' stroke='%23EAE8DF' stroke-width='1'/%3E%3C/svg%3E") 3 25, crosshair;
+  cursor: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='7' fill='rgba(0%2C0%2C0%2C0.75)'/%3E%3C/svg%3E") 8 8, crosshair;
   user-select: none;
 }
 
@@ -303,30 +343,30 @@ section.split,
 
 .split {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.5fr 1fr;
   gap: 2rem;
   /* Full-bleed background; content centered to a 67rem measure via padding */
-  padding: 7rem max(2.5rem, calc((100% - 67rem) / 2));
+  padding: 9rem max(2.5rem, calc((100% - 90rem) / 2));
 }
 
-.split__body {
-  max-width: 21rem;
-}
+.split__body {}
 
 .split__body p + p {
-  margin-top: 1.4em;
+  margin-top: 1.2em;
 }
 
 .split__body,
 .split .label {
-  font-size: 0.95rem;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
 }
 
 /* How we work */
 .split--how {
   position: relative;
-  padding-top: 4rem;
-  padding-bottom: 9rem;
+  padding-top: 6rem;
+  padding-bottom: 12rem;
 }
 
 .split__aside {
@@ -346,21 +386,21 @@ section.split,
 
 .arrow-sweep {
   position: absolute;
-  left: -1rem;
-  top: 0.5rem;
-  width: min(30rem, 42vw);
+  left: -2rem;
+  top: -18rem;
+  width: min(44rem, 59vw);
   height: auto;
 }
 
 /* ============ Manifesto ============ */
 .manifesto {
-  padding: 8rem 1.5rem 9rem;
+  padding: 11rem 1.5rem 12rem;
   text-align: center;
 }
 
 .manifesto__title {
-  font-size: clamp(2rem, 5.4vw, 4.2rem);
-  line-height: 1.18;
+  font-size: clamp(2.4rem, 6.25vw, 8rem);
+  line-height: 1.1;
 }
 
 /* ============ Bands (sage) ============ */
@@ -369,12 +409,12 @@ section.split,
 }
 
 .band--network {
-  padding: 1rem 0 6rem;
+  padding: 4rem 0 9rem;
 }
 
 .split--band {
-  padding-top: 6rem;
-  padding-bottom: 3rem;
+  padding-top: 7rem;
+  padding-bottom: 4rem;
 }
 
 .world-map {
@@ -388,25 +428,27 @@ section.split,
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
-  max-width: 60rem;
-  margin: 4rem auto 0;
+  max-width: clamp(60rem, 62.5vw, 90rem);
+  margin: 6rem auto 0;
   padding: 0 2.5rem;
   text-align: center;
 }
 
 .office__city {
-  font-size: 0.95rem;
+  font-size: 1.5rem;
+  line-height: 1.1;
 }
 
 .office__addr {
-  margin-top: 0.4rem;
-  font-size: 0.82rem;
+  margin-top: 0.6rem;
+  font-size: 0.875rem;
   opacity: 0.85;
 }
 
 .office__clock {
   margin-top: 1.6rem;
-  font-size: clamp(1.6rem, 3vw, 2.3rem);
+  font-size: clamp(2rem, 4.2vw, 3.75rem);
+  line-height: 1.1;
   font-variant-numeric: tabular-nums;
 }
 
@@ -415,26 +457,28 @@ section.split,
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 9rem 1.5rem 7rem;
+  padding: 13rem 1.5rem 12rem;
   text-align: center;
 }
 
 .impact__title {
-  font-size: clamp(2.2rem, 5vw, 3.4rem);
-  line-height: 1.15;
+  font-size: clamp(2rem, 4.2vw, 3.75rem);
+  line-height: 1.1;
 }
 
 .impact__mark {
-  margin: 4.5rem 0;
+  margin: 6rem 0;
 }
 
 .impact__body {
-  max-width: 34rem;
-  font-size: 0.95rem;
+  max-width: 40rem;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
 }
 
 .impact__body p + p {
-  margin-top: 1.5em;
+  margin-top: 1.2em;
 }
 
 .signature {
@@ -445,40 +489,28 @@ section.split,
 
 /* ============ CTA ============ */
 .band--cta {
-  background: #e5e3d8;
-  padding: 9rem 1.5rem;
+  background: var(--bone);
+  padding: 18rem max(1.5rem, calc((100% - 90rem) / 2));
   text-align: center;
 }
 
 .cta__title {
-  max-width: 46rem;
+  max-width: clamp(56rem, 62.5vw, 90rem);
   margin: 0 auto;
-  font-size: clamp(2rem, 4.6vw, 3.4rem);
-  line-height: 1.22;
+  font-size: clamp(2.2rem, 5.2vw, 8rem);
+  line-height: 1.1;
 }
 
 /* ============ Footer ============ */
+.footer {
+  background: var(--black);
+}
+
 .checker {
-  display: grid;
-}
-
-.checker__row {
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-}
-
-.checker__row i {
   display: block;
-  aspect-ratio: 1;
+  width: 100%;
+  height: auto;
   background: var(--bone);
-}
-
-.checker__row i.b {
-  background: var(--black);
-}
-
-.checker__row--3 {
-  background: var(--black);
 }
 
 .footer__bar {
@@ -488,14 +520,14 @@ section.split,
   gap: 2rem;
   background: var(--black);
   color: var(--bone);
-  padding: 2.6rem 2.5rem 3rem;
-  font-size: 0.78rem;
-  line-height: 1.6;
+  padding: 17rem 2.5rem 3rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
 }
 
 .footer__bar .mark {
   color: var(--bone);
-  width: 1.6rem;
+  width: 3rem;
 }
 
 .footer__col--right {

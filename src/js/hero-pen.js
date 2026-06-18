@@ -27,9 +27,7 @@ function enablePen(hero) {
   hero.appendChild(ink);
   hero.classList.add('is-inkable');
 
-  const hint = hero.querySelector('.hero-hint');
   const clearBtn = hero.querySelector('.hero-clear');
-  hint.classList.add('is-visible');
 
   let path = null;
   let d = '';
@@ -45,7 +43,6 @@ function enablePen(hero) {
     if (e.button !== 0 || points >= MAX_POINTS) return;
     if (e.target.closest('.hero-clear')) return;
     hero.setPointerCapture(e.pointerId);
-    hint.classList.remove('is-visible');
 
     last = pos(e);
     d = `M ${last.x.toFixed(1)} ${last.y.toFixed(1)} l 0 0.01`;
