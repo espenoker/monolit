@@ -188,8 +188,12 @@ svg[data-scribble] .draw-path {
   top: calc(100% - 0.08em);
 }
 
+/* The underline box is squashed vertically (viewBox stretched to a thin
+   0.45em strip), which would fatten a scaled horizontal stroke. Pin it to
+   screen pixels so it reads the same weight as the other scribbles. */
 .annotate--underline .ink {
-  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+  stroke-width: 1.75;
 }
 
 .annotate--brackets > svg {
