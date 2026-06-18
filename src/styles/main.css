@@ -134,25 +134,6 @@ svg[data-scribble] .draw-path {
 [data-scribble] .ink {
   stroke: var(--ink);
   stroke-width: 1.75;
-}
-
-/* Stroke widths are in user units; tune per context so the rendered
-   ink reads ~1.5–2px at every scale the scribble is drawn at. */
-.annotate--caret .ink {
-  stroke-width: 4.5;
-}
-
-.annotate--lead .ink {
-  stroke-width: 2.6;
-}
-
-.signature .ink {
-  stroke-width: 2.7;
-}
-
-/* Fixed-size / independently-scaled scribbles: pin stroke to screen pixels
-   so weight stays constant as the viewport resizes. */
-.arrow-sweep .ink {
   vector-effect: non-scaling-stroke;
 }
 
@@ -172,7 +153,6 @@ svg[data-scribble] .draw-path {
 
 .annotate--hero .ink {
   vector-effect: non-scaling-stroke;
-  stroke-width: var(--stroke-w);
 }
 
 
@@ -188,9 +168,6 @@ svg[data-scribble] .draw-path {
   top: calc(100% - 0.08em);
 }
 
-.annotate--underline .ink {
-  stroke-width: 2;
-}
 
 .annotate--brackets > svg {
   /* Bracket ink occupies the outer ~12% of the asset on each side */
@@ -525,7 +502,7 @@ section.split,
   gap: 2rem;
   background: var(--black);
   color: var(--bone);
-  padding: 17rem 2.5rem 3rem;
+  padding: 17rem max(2.5rem, calc((100% - 90rem) / 2)) 3rem;
   font-size: 0.875rem;
   line-height: 1.5;
 }

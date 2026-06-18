@@ -88,9 +88,6 @@ HTML = f"""<!doctype html>
   <title>Monolit — For those who build</title>
   <meta name="description" content="Monolit is a firm of serious builders designing quantitative trading systems that endure." />
   <link rel="icon" href="data:," />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/src/styles/main.css" />
 </head>
 <body>
@@ -117,7 +114,7 @@ HTML = f"""<!doctype html>
   <section class="hero" id="hero" aria-label="For those who build">
     <h1 class="hero__title">
       For those<br />
-      who&nbsp;<span class="annotate annotate--hero"><em>build</em><svg data-scribble="manual" data-duration="1100" viewBox="0 0 326 141" preserveAspectRatio="none" aria-hidden="true"><defs><mask id="m-hero"><path class="draw-path" pathLength="1" d="{HERO_MASK}" stroke="#fff" stroke-width="26" fill="none" /></mask></defs><g mask="url(#m-hero)"><path d="{hero_d}" /></g></svg></span>
+      who&nbsp;<span class="annotate annotate--hero"><em>build</em><svg data-scribble="manual" data-duration="1100" viewBox="0 0 328 143" preserveAspectRatio="none" aria-hidden="true"><path class="draw-path ink" pathLength="1" d="M299.333 25.3714C299.379 24.5852 299.194 22.7355 298.084 21.6257C296.697 20.2384 281.853 5.53312 212.905 13.1632C143.956 20.7933 24.7882 44.3773 14.2448 88.3544C3.70137 132.331 93.1815 131.222 108.719 128.725C124.257 126.227 225.113 109.164 248.558 88.0769C272.003 66.9901 306.824 34.9437 215.679 9.14008C124.534 -16.6635 38.5223 30.6431 27.2852 37.0246C16.0482 43.4062 -8.50688 75.0364 5.92094 97.6492C20.3488 120.262 49.7593 139.962 89.852 141.071C129.945 142.181 194.87 130.528 229.413 116.516C263.957 102.505 302.801 85.0249 312.651 71.4294C322.501 57.834 335.819 34.5275 316.951 19.1286C313.609 16.4008 312.651 13.8569 310.709 11.4985" /></svg></span>
     </h1>
 
     <div class="hero__mark">{MARK}</div>
@@ -227,7 +224,7 @@ HTML = f"""<!doctype html>
         <p>0161 Oslo</p>
       </div>
       <div class="footer__col footer__col--mark">{MARK}</div>
-      <div class="footer__col">
+      <div class="footer__col footer__col--right">
         <p><a href="mailto:hello@monolit.com">hello@monolit.com</a></p>
         <p><a href="#" rel="noopener">LinkedIn</a></p>
       </div>
