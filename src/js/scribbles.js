@@ -1,7 +1,9 @@
 // Generic draw-on engine for hand-drawn SVG scribbles.
-// Paths with vector-effect:non-scaling-stroke need pixel-space dasharray/dashoffset
-// (the browser interprets those values in screen pixels, not pathLength units).
-// Paths without it use pathLength="1" normalization: dashoffset 1.03 → 0.
+// Paths with vector-effect:non-scaling-stroke need px-unit dasharray/dashoffset.
+// Using bare numbers would interact with pathLength="1" normalization: the browser
+// scales unitless values by getTotalLength(), making the dash 855× the path length
+// so the draw-on animation is compressed into ~1ms. Explicit px units bypass this.
+// Paths without non-scaling-stroke use pathLength="1" normalization: offset 1.03 → 0.
 
 const EASE = 'cubic-bezier(0.5, 0.05, 0.55, 0.95)';
 
@@ -14,15 +16,15 @@ function pixelLength(path) {
   return path.getTotalLength() * scale;
 }
 
-// Sets pixel-accurate dasharray/dashoffset for non-scaling paths (overriding
-// the CSS 1/1.03 values which would be interpreted as 1px and leave the path
-// visible). Returns the start dashoffset value for the animation keyframe.
+// For non-scaling paths: sets px-unit dasharray/dashoffset so pathLength="1"
+// normalization doesn't scale the values into oblivion. Returns a px string
+// for the WAAPI start keyframe. For normal paths: returns '1.03' (pathLength units).
 function prepPath(path) {
-  if (getComputedStyle(path).vectorEffect !== 'non-scaling-stroke') return 1.03;
+  if (getComputedStyle(path).vectorEffect !== 'non-scaling-stroke') return '1.03';
   const len = pixelLength(path);
-  path.style.strokeDasharray = `${len} ${len * 1.05}`;
-  path.style.strokeDashoffset = len;
-  return len;
+  path.style.strokeDasharray = `${len}px ${len * 1.05}px`;
+  path.style.strokeDashoffset = `${len}px`;
+  return `${len}px`;
 }
 
 // Draws all paths of one scribble svg in sequence; duration is split
@@ -47,7 +49,7 @@ export function draw(svg) {
     const startOffset = prepPath(p);
     const d = (duration * weights[i]) / total;
     const anim = p.animate(
-      [{ strokeDashoffset: startOffset }, { strokeDashoffset: 0 }],
+      [{ strokeDashoffset: startOffset }, { strokeDashoffset: '0' }],
       { duration: d, delay: t, easing: EASE, fill: 'forwards' }
     );
     t += d + gap;
