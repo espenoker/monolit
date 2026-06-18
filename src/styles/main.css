@@ -131,10 +131,9 @@ svg[data-scribble] .draw-path {
   stroke-dashoffset: 1.03;
 }
 
-svg[data-scribble] .ink {
+[data-scribble] .ink {
   stroke: var(--ink);
   stroke-width: 1.75;
-  vector-effect: non-scaling-stroke;
 }
 
 /* Stroke widths are in user units; tune per context so the rendered
@@ -148,7 +147,13 @@ svg[data-scribble] .ink {
 }
 
 .signature .ink {
-  stroke-width: 2.4;
+  stroke-width: 2.7;
+}
+
+/* Fixed-size / independently-scaled scribbles: pin stroke to screen pixels
+   so weight stays constant as the viewport resizes. */
+.arrow-sweep .ink {
+  vector-effect: non-scaling-stroke;
 }
 
 .annotate--circle > svg {
@@ -183,8 +188,8 @@ svg[data-scribble] .ink {
   top: calc(100% - 0.08em);
 }
 
-.impact__body .annotate--underline .ink {
-  stroke-width: 6.5;
+.annotate--underline .ink {
+  stroke-width: 2;
 }
 
 .annotate--brackets > svg {
