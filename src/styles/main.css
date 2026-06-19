@@ -418,12 +418,12 @@ section.split,
 }
 
 .band--network {
-  padding: 4rem 0 9rem;
+  padding: 0 0 10rem;
 }
 
 .split--band {
-  padding-top: 7rem;
-  padding-bottom: 4rem;
+  padding-top: 10rem;
+  padding-bottom: 5rem;
 }
 
 .world-map {
@@ -447,7 +447,7 @@ section.split,
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
   max-width: clamp(60rem, 62.5vw, 90rem);
-  margin: 6rem auto 0;
+  margin: 4rem auto 0;
   padding: 0 2.5rem;
   text-align: center;
 }
@@ -475,7 +475,7 @@ section.split,
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 13rem 1.5rem 12rem;
+  padding: 10rem 1.5rem 10rem;
   text-align: center;
 }
 
@@ -526,7 +526,7 @@ section.split,
 /* ============ CTA ============ */
 .band--cta {
   background: var(--bone);
-  padding: 18rem max(1.5rem, calc((100% - 90rem) / 2));
+  padding: 10rem max(1.5rem, calc((100% - 90rem) / 2));
   text-align: center;
 }
 
@@ -557,6 +557,7 @@ section.split,
   gap: 2rem;
   background: var(--black);
   color: var(--bone);
+  margin: -1px;
   padding: 17rem max(2.5rem, calc((100% - 90rem) / 2)) 3rem;
   font-size: 0.875rem;
   line-height: 1.5;
@@ -644,7 +645,7 @@ section.split,
   }
 
   .band--cta {
-    padding: 10rem 1.5rem;
+    padding: 6rem 1.5rem;
   }
 }
 
