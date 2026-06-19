@@ -483,7 +483,7 @@ section.split,
    so size by height and let width follow the aspect ratio. */
 .mark--tower {
   width: auto;
-  height: 11rem;
+  height: 17.5rem;
 }
 
 .impact__body {
@@ -497,10 +497,21 @@ section.split,
   margin-top: 1.2em;
 }
 
-.signature {
-  width: 9rem;
-  height: auto;
+.impact__cta {
+  display: inline-block;
   margin-top: 3.5rem;
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.annotate--oval > svg {
+  left: -0.7em;
+  top: -0.55em;
+  width: calc(100% + 1.4em);
+  height: calc(100% + 1.1em);
 }
 
 /* ============ CTA ============ */

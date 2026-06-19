@@ -6,7 +6,7 @@
 import sprite from '../assets/monolit-frames.svg?raw';
 import { reducedMotion } from './scribbles.js';
 
-const FRAMES = Array.from({ length: 16 }, (_, i) => String(i + 1).padStart(2, '0'));
+const FRAMES = Array.from({ length: 17 }, (_, i) => String(i).padStart(2, '0'));
 const FRAME_MS = 45;
 
 export function initBuilding() {
@@ -58,13 +58,13 @@ export function initBuilding() {
     }, FRAME_MS);
   }
 
-  // Built while the mark's centre sits within the 25%-75% viewport band;
-  // crossing 75% on the way in starts the build, crossing 25% reverses it.
+  // Built while the mark's centre sits within the 20%-80% viewport band;
+  // crossing 80% on the way in starts the build, crossing 20% reverses it.
   let built = false;
   function onScroll() {
     const r = mark.getBoundingClientRect();
     const p = (r.top + r.height / 2) / window.innerHeight;
-    const inBand = p > 0.25 && p < 0.75;
+    const inBand = p > 0.20 && p < 0.80;
     if (inBand && !built) {
       built = true;
       play(true);
