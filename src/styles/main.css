@@ -479,6 +479,13 @@ section.split,
   margin: 6rem 0;
 }
 
+/* The building frames are a tall 115x281 tower (vs the square logomark),
+   so size by height and let width follow the aspect ratio. */
+.mark--tower {
+  width: auto;
+  height: 11rem;
+}
+
 .impact__body {
   max-width: 40rem;
   font-size: 1.5rem;

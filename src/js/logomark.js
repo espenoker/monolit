@@ -49,24 +49,5 @@ export function initLogomark() {
     }, { passive: true });
   }
 
-  // ── Impact mark: triggered by IntersectionObserver ──
-  const impactMarks = Array.from(document.querySelectorAll('.impact__mark .mark'));
-
-  impactMarks.forEach(mark => {
-    const use = mark.querySelector('use');
-    if (use) use.setAttribute('href', '#Logo_animation_frame_01');
-    mark._visible = false;
-  });
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      const mark = entry.target;
-      const nowVisible = entry.isIntersecting;
-      if (nowVisible === mark._visible) return;
-      mark._visible = nowVisible;
-      play(mark, nowVisible);
-    });
-  }, { threshold: 0.15 });
-
-  impactMarks.forEach(mark => observer.observe(mark));
+  // The impact mark is driven separately by building.js (scroll-band tower).
 }
