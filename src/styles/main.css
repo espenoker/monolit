@@ -547,6 +547,7 @@ section.split,
   width: 100%;
   height: auto;
   background: var(--bone);
+  margin-bottom: -1px;
 }
 
 .footer__bar {
