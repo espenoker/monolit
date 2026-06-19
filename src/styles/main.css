@@ -611,7 +611,7 @@ section.split,
 
   .footer__bar {
     grid-template-columns: 1fr 1fr;
-    padding: 2rem 1.625rem;
+    padding: 4rem 1.625rem 2rem;
   }
 
   .footer__col--mark {
@@ -646,6 +646,21 @@ section.split,
 
   .band--cta {
     padding: 6rem 1.5rem;
+  }
+
+  .band--network {
+    padding: 0 0 6rem;
+  }
+
+  .impact {
+    padding: 6rem 1.5rem;
+  }
+
+  .split__body,
+  .split .label,
+  .impact__body,
+  .impact__cta {
+    font-size: 1.25rem;
   }
 }
 
