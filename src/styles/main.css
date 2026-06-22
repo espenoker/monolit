@@ -538,18 +538,18 @@ section.split,
 }
 
 /* ============ Footer ============ */
+.cta-footer-wrap {
+  background: var(--bone);
+}
+
 .footer {
-  background: var(--black);
+  background: transparent;
 }
 
 .checker {
   display: block;
   width: 100%;
   height: auto;
-  background: var(--bone);
-  /* Sub-pixel gap fix: pull the footer bar under the checker so any
-     fractional-pixel rounding on the SVG height is fully covered. */
-  margin-bottom: -4px;
 }
 
 .footer__bar {
@@ -560,7 +560,6 @@ section.split,
   background: var(--black);
   color: var(--bone);
   margin: 0;
-  margin-top: -1px;
   padding: 17rem max(2.5rem, calc((100% - 90rem) / 2)) 3rem;
   font-size: 0.875rem;
   line-height: 1.5;
