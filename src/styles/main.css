@@ -539,7 +539,7 @@ section.split,
 
 /* ============ Footer ============ */
 .footer {
-  background: var(--black);
+  background: var(--bone);
 }
 
 .checker {
@@ -547,7 +547,6 @@ section.split,
   width: 100%;
   height: auto;
   background: var(--bone);
-  margin-bottom: -1px;
 }
 
 .footer__bar {
