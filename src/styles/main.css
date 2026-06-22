@@ -557,7 +557,8 @@ section.split,
   gap: 2rem;
   background: var(--black);
   color: var(--bone);
-  margin: -1px;
+  margin: 0;
+  margin-top: -1px;
   padding: 17rem max(2.5rem, calc((100% - 90rem) / 2)) 3rem;
   font-size: 0.875rem;
   line-height: 1.5;
@@ -662,6 +663,10 @@ section.split,
   .impact__cta {
     font-size: 1.25rem;
   }
+
+  .manifesto .annotate--circle .ink { stroke-width: 3.5; }
+  .manifesto .annotate--underline .ink { stroke-width: 1.1; }
+  .manifesto .annotate--brackets .ink { stroke-width: 3.5; }
 }
 
 /* ============ Reduced motion ============ */
