@@ -539,7 +539,7 @@ section.split,
 
 /* ============ Footer ============ */
 .footer {
-  background: var(--bone);
+  background: var(--black);
 }
 
 .checker {
@@ -547,6 +547,9 @@ section.split,
   width: 100%;
   height: auto;
   background: var(--bone);
+  /* Sub-pixel gap fix: pull the footer bar under the checker so any
+     fractional-pixel rounding on the SVG height is fully covered. */
+  margin-bottom: -4px;
 }
 
 .footer__bar {
