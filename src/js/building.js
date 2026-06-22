@@ -58,19 +58,16 @@ export function initBuilding() {
     }, FRAME_MS);
   }
 
-  // Built while the mark's centre sits within the 20%-80% viewport band;
-  // crossing 80% on the way in starts the build, crossing 20% reverses it.
+  // Builds when the mark's centre crosses the 80% threshold from the bottom.
+  // Never reverses — once triggered it plays to completion and stays built.
   let built = false;
   function onScroll() {
+    if (built) return;
     const r = mark.getBoundingClientRect();
     const p = (r.top + r.height / 2) / window.innerHeight;
-    const inBand = p > 0.20 && p < 0.80;
-    if (inBand && !built) {
+    if (p < 0.80) {
       built = true;
       play(true);
-    } else if (!inBand && built) {
-      built = false;
-      play(false);
     }
   }
 
