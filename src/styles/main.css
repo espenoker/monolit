@@ -546,6 +546,12 @@ section.split,
   background: transparent;
 }
 
+.checker-wrap {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: -1px;
+}
+
 .checker {
   display: block;
   width: 100%;
