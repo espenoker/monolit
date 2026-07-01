@@ -5,10 +5,11 @@ import { initClocks } from './clocks.js';
 import { initLogomark } from './logomark.js';
 import { initBuilding } from './building.js';
 import { initMap } from './map.js';
-
+import { initGraphs } from './graphs.js';
 initScribbles();
 initHeroPen();
 initClocks();
 initLogomark();
 initBuilding();
 initMap();
+initGraphs();

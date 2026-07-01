@@ -4,14 +4,14 @@
   src: url("../assets/IvarTextTRIAL-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 @font-face {
   font-family: "Ivar Text";
   src: url("../assets/IvarTextTRIAL-Italic.woff2") format("woff2");
   font-weight: 400;
   font-style: italic;
-  font-display: swap;
+  font-display: block;
 }
 
 /* ============ Logomark animation ============ */
@@ -103,8 +103,7 @@ h2 {
 
 .annotate > svg,
 .arrow-sweep,
-.signature,
-.world-map {
+.signature {
   overflow: visible;
 }
 
@@ -355,7 +354,7 @@ section.split,
   grid-template-columns: 1.5fr 1fr;
   gap: 2rem;
   /* Full-bleed background; content centered to a 67rem measure via padding */
-  padding: 9rem max(2.5rem, calc((100% - 90rem) / 2));
+  padding: 9rem max(2.5rem, calc((100% - 75.5rem) / 2));
 }
 
 .split__body {}
@@ -378,12 +377,30 @@ section.split,
   padding-bottom: 12rem;
 }
 
+.graph-stage {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+}
+
+.graph-stage svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
 .split__aside {
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .annotate--label {
   margin-left: 1.5rem;
+  align-self: flex-start;
 }
 
 .annotate--label > svg {
@@ -391,6 +408,13 @@ section.split,
   top: -0.85em;
   width: calc(100% + 3em);
   height: calc(100% + 1.7em);
+}
+
+.split--how .annotate--label > svg {
+  width: calc(117% + 1.17em);
+  left: -1em;
+  top: -1.2em;
+  height: auto;
 }
 
 .arrow-sweep {
@@ -431,40 +455,59 @@ section.split,
   width: min(64rem, 88vw);
   height: auto;
   margin: 0 auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-miterlimit: 10;
+  stroke-width: 1.5;
+  overflow: visible;
 }
 
-.world-map-wrap[data-map-draw] {
-  clip-path: inset(0 100% 0 0);
-  transition: clip-path 0.7s cubic-bezier(0.5, 0.05, 0.55, 0.95);
+.map-marker {
+  fill: currentColor;
+  stroke: none;
+  opacity: 0;
+  transition: opacity 600ms ease;
 }
 
-.world-map-wrap.is-drawn {
-  clip-path: inset(0 0% 0 0);
+.map-marker.is-visible {
+  opacity: 1;
 }
 
 .offices {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  max-width: clamp(60rem, 62.5vw, 90rem);
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto auto;
+  gap: 4rem 0;
+  width: 100%;
   margin: 4rem auto 0;
-  padding: 0 2.5rem;
+  padding: 0 max(2.5rem, calc((100% - 90rem) / 2));
   text-align: center;
 }
 
+/* Row 1: Oslo + New York centered (cols 3–6 and 7–10) */
+.office--r1c1 { grid-column: 3 / span 4; grid-row: 1; }
+.office--r1c2 { grid-column: 7 / span 4; grid-row: 1; }
+
+/* Row 2: London, Tokyo, Singapore — full 12 cols in thirds */
+.office--r2c1 { grid-column: 1 / span 4; grid-row: 2; }
+.office--r2c2 { grid-column: 5 / span 4; grid-row: 2; }
+.office--r2c3 { grid-column: 9 / span 4; grid-row: 2; }
+
 .office__city {
-  font-size: 1.5rem;
+  font-size: 1.375rem;
   line-height: 1.1;
 }
 
 .office__addr {
-  margin-top: 0.6rem;
-  font-size: 0.875rem;
+  margin-top: 2.5rem;
+  font-size: 1.375rem;
+  line-height: 1.1;
   opacity: 0.85;
 }
 
 .office__clock {
-  margin-top: 1.6rem;
+  margin-top: 2.5rem;
   font-size: clamp(2rem, 4.2vw, 3.75rem);
   line-height: 1.1;
   font-variant-numeric: tabular-nums;
@@ -475,7 +518,7 @@ section.split,
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10rem 1.5rem 10rem;
+  padding: 10rem 1.5rem 12.5rem;
   text-align: center;
 }
 
@@ -526,7 +569,7 @@ section.split,
 /* ============ CTA ============ */
 .band--cta {
   background: var(--bone);
-  padding: 10rem max(1.5rem, calc((100% - 90rem) / 2));
+  padding: clamp(220px, 91.4px + 8.93vw, 320px) max(1.5rem, calc((100% - 90rem) / 2));
   text-align: center;
 }
 
