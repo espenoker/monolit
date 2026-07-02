@@ -652,12 +652,40 @@ section.split,
 
   .split__aside {
     position: relative;
-    min-height: 6rem;
+  }
+
+  .graph-stage {
+    aspect-ratio: 323 / 272;
+    min-height: 0;
   }
 
   .offices {
-    grid-template-columns: 1fr;
-    gap: 3rem;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 2.5rem 0;
+    padding: 0 1.25rem;
+  }
+
+  /* Oslo centered (cols 4–9) */
+  .office--r1c1 { grid-column: 4 / span 6; grid-row: 1; }
+  /* New York left, London right */
+  .office--r1c2 { grid-column: 1 / span 6; grid-row: 2; }
+  .office--r2c1 { grid-column: 7 / span 6; grid-row: 2; }
+  /* Tokyo left, Singapore right */
+  .office--r2c2 { grid-column: 1 / span 6; grid-row: 3; }
+  .office--r2c3 { grid-column: 7 / span 6; grid-row: 3; }
+
+  .office__city,
+  .office__addr {
+    font-size: 0.9375rem;
+  }
+
+  .office__addr,
+  .office__clock {
+    margin-top: 1.875rem;
+  }
+
+  .office__clock {
+    font-size: 2.5rem;
   }
 
   .footer__bar {
