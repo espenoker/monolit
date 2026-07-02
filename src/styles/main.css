@@ -351,7 +351,7 @@ section.split,
 
 .split {
   display: grid;
-  grid-template-columns: 1.5fr 1fr;
+  grid-template-columns: 1.35fr 1fr;
   gap: 2rem;
   /* Full-bleed background; content centered to a 67rem measure via padding */
   padding: 9rem max(2.5rem, calc((100% - 75.5rem) / 2));
@@ -500,14 +500,14 @@ section.split,
 }
 
 .office__addr {
-  margin-top: 2.5rem;
+  margin-top: 1.75rem;
   font-size: 1.375rem;
   line-height: 1.1;
   opacity: 0.85;
 }
 
 .office__clock {
-  margin-top: 2.5rem;
+  margin-top: 1.75rem;
   font-size: clamp(2rem, 4.2vw, 3.75rem);
   line-height: 1.1;
   font-variant-numeric: tabular-nums;
@@ -528,7 +528,7 @@ section.split,
 }
 
 .impact__mark {
-  margin: 6rem 0;
+  margin: 4rem 0 5.5rem;
 }
 
 /* The building frames are a tall 115x281 tower (vs the square logomark),
@@ -657,6 +657,7 @@ section.split,
   .graph-stage {
     aspect-ratio: 323 / 272;
     min-height: 0;
+    margin-top: 2rem;
   }
 
   .offices {
@@ -681,7 +682,7 @@ section.split,
 
   .office__addr,
   .office__clock {
-    margin-top: 1.875rem;
+    margin-top: 1.75rem;
   }
 
   .office__clock {
@@ -745,6 +746,8 @@ section.split,
   .manifesto .annotate--circle .ink { stroke-width: 3.5; }
   .manifesto .annotate--underline .ink { stroke-width: 1.1; }
   .manifesto .annotate--brackets .ink { stroke-width: 3.5; }
+
+  .split--how .annotate--label .ink { stroke-width: 0.8; }
 }
 
 /* ============ Reduced motion ============ */
