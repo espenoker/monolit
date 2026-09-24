@@ -264,6 +264,16 @@ svg[data-scribble] .draw-path {
   padding-bottom: 3rem;
 }
 
+.hero__br {
+  display: none;
+}
+
+.hero__sub {
+  max-width: 14.5em;
+  font-size: clamp(1.125rem, 1.67vw, 1.5rem);
+  line-height: 1.2;
+}
+
 .hero__mark {
   position: absolute;
   bottom: 3rem;
@@ -591,6 +601,10 @@ section.split,
 
 /* ============ Responsive ============ */
 @media (max-width: 760px) {
+  .hero__br {
+    display: inline;
+  }
+
   .split {
     grid-template-columns: 1fr;
     gap: 2.5rem;
