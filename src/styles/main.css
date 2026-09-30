@@ -380,6 +380,11 @@ section.split,
   letter-spacing: -0.02em;
 }
 
+/* Matches the top padding of How we work */
+.split--intro {
+  padding-bottom: 6rem;
+}
+
 /* How we work */
 .split--how {
   position: relative;
