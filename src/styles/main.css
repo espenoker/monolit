@@ -1,14 +1,16 @@
 /* ============ Fonts ============ */
 @font-face {
   font-family: "Ivar Text";
-  src: url("../assets/IvarTextTRIAL-Regular.woff2") format("woff2");
+  src: url("../assets/IvarText-Regular.woff2") format("woff2"),
+       url("../assets/IvarText-Regular.woff") format("woff");
   font-weight: 400;
   font-style: normal;
   font-display: block;
 }
 @font-face {
   font-family: "Ivar Text";
-  src: url("../assets/IvarTextTRIAL-Italic.woff2") format("woff2");
+  src: url("../assets/IvarText-Italic.woff2") format("woff2"),
+       url("../assets/IvarText-Italic.woff") format("woff");
   font-weight: 400;
   font-style: italic;
   font-display: block;
